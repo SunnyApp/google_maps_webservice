@@ -51,6 +51,7 @@ class GoogleMapsPlaces extends GoogleWebService {
       name: name,
       pagetoken: pagetoken,
     );
+
     return _decodeSearchResponse(await doGet(url));
   }
 
@@ -302,9 +303,12 @@ class GoogleMapsPlaces extends GoogleWebService {
     List<Component> components,
     bool strictbounds,
     String region,
+    bool encodeUri = true,
   }) {
     final params = {
-      'input': input != null ? Uri.encodeComponent(input) : null,
+      'input': input != null && encodeUri == true
+          ? Uri.encodeComponent(input)
+          : input,
       'language': language,
       'origin': origin,
       'location': location,
@@ -330,9 +334,10 @@ class GoogleMapsPlaces extends GoogleWebService {
     Location location,
     num radius,
     String language,
+    bool encodeUri = true,
   }) {
     final params = {
-      'input': input != null ? Uri.encodeComponent(input) : null,
+      'input': input != null && encodeUri ? Uri.encodeComponent(input) : input,
       'language': language,
       'location': location,
       'radius': radius,

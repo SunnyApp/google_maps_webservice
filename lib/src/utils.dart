@@ -1,8 +1,9 @@
 library google_maps_webservice.utils;
 
 import 'dart:async';
-import 'package:meta/meta.dart';
+
 import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 
 const kGMapsUrl = 'https://maps.googleapis.com/maps/api';
 
@@ -50,7 +51,9 @@ abstract class GoogleWebService {
   void dispose() => httpClient.close();
 
   @protected
-  Future<Response> doGet(String url) => httpClient.get(url);
+  Future<Response> doGet(String url) {
+    return httpClient.get(url);
+  }
 
   @protected
   Future<Response> doPost(String url, String body) {
